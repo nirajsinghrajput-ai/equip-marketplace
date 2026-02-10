@@ -40,7 +40,7 @@ export default function PostRequirement() {
       body: JSON.stringify(form),
     })
 
-    alert("Requirement submitted successfully!")
+    window.location.href = "/thank-you"
   }
 
   return (
