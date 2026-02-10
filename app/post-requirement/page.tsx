@@ -20,7 +20,24 @@ export default function PostRequirement() {
   }
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
+  e.preventDefault()
+
+  const { error } = await supabase.from("leads").insert([form])
+
+  if (error) {
+    alert(error.message)
+    return
+  }
+
+  // send email alert
+  await fetch("/api/send-email", {
+    method: "POST",
+    body: JSON.stringify(form),
+  })
+
+  alert("Requirement submitted!")
+}
+
 
     const { data, error } = await supabase.from("leads").insert([form])
 
