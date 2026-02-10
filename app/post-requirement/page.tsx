@@ -19,7 +19,7 @@ export default function PostRequirement() {
     setForm({ ...form, [e.target.placeholder]: e.target.value })
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async(e: any) => {
   e.preventDefault()
 
   const { error } = await supabase.from("leads").insert([form])
