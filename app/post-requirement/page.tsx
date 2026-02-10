@@ -19,34 +19,22 @@ export default function PostRequirement() {
     setForm({ ...form, [e.target.placeholder]: e.target.value })
   }
 
-  const handleSubmit = async(e: any) => {
-  e.preventDefault()
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
 
-  const { error } = await supabase.from("leads").insert([form])
-
-  if (error) {
-    alert(error.message)
-    return
-  }
-
-  // send email alert
-  await fetch("/api/send-email", {
-    method: "POST",
-    body: JSON.stringify(form),
-  })
-
-  alert("Requirement submitted!")
-}
-
-
-    const { data, error } = await supabase.from("leads").insert([form])
+    const { error } = await supabase.from("leads").insert([form])
 
     if (error) {
       alert(error.message)
-      console.log(error)
-    } else {
-      alert("Requirement submitted!")
+      return
     }
+
+    await fetch("/api/send-email", {
+      method: "POST",
+      body: JSON.stringify(form),
+    })
+
+    alert("Requirement submitted!")
   }
 
   return (
@@ -56,18 +44,4 @@ export default function PostRequirement() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input className="border p-3 rounded" placeholder="equipment_type" onChange={handleChange}/>
         <input className="border p-3 rounded" placeholder="quantity" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="city" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="start_date" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="duration" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="company_name" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="contact_person" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="phone" onChange={handleChange}/>
-        <input className="border p-3 rounded" placeholder="email" onChange={handleChange}/>
-
-        <button className="bg-black text-white p-3 rounded">
-          Get Supplier Matches
-        </button>
-      </form>
-    </div>
-  )
-}
+        <input className="border p-3 rounded" placeholder="city"
