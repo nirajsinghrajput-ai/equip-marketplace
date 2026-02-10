@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     await resend.emails.send({
       from: "Leads <onboarding@resend.dev>",
-      to: ["nirajsinghrajput.ai@gmail.com"], // your email
+      to: ["nirajsinghrajput@gmail.com"], // your email
       subject: "New Equipment Requirement 🚜",
       html: `
         <h2>New Lead Received</h2>
